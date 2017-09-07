@@ -16,43 +16,16 @@ repositories {
 
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId 'com.kerneladiutor.mod'
-        minSdkVersion 19
-        targetSdkVersion 23
+        minSdkVersion 25
+        targetSdkVersion 25
         versionCode 15
         versionName "1.0 build " + getDate()
     }
 
-    signingConfigs {
-        debug {
-            storeFile file("debugKey.jks")
-            storePassword "debug123"
-            keyAlias "debug"
-            keyPassword "debug123"
-        }
-    }
-
-    buildTypes {
-        debug {
-            minifyEnabled false
-            signingConfig signingConfigs.debug
-            resValue "string", "APP_UPDATE_URL", "https://raw.githubusercontent.com/yoinx/kernel_adiutor/master/download/app/app-debug.json"
-        }
-
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "APP_UPDATE_URL", "https://raw.githubusercontent.com/yoinx/kernel_adiutor/master/download/app/app-release.json"
-        }
-    }
-    lintOptions {
-        abortOnError false
-    }
-    productFlavors {
-    }
 }
 
 def getDate() {
@@ -75,6 +48,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.6@aar') {
-        transitive = true;
+        transitive = true
     }
 }
