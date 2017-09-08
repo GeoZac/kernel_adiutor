@@ -13,11 +13,9 @@
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
-
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
-
     <uses-feature
         android:name="android.hardware.screen.portrait"
         android:required="false" />
@@ -32,7 +30,8 @@
         android:theme="@style/AppThemeLight">
         <activity
             android:name=".MainActivity"
-            android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize|navigation">
+            android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize|navigation"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +39,10 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".TextActivity"
@@ -95,6 +98,7 @@
                 <action android:name="com.kerneladiutor.mod.action.TOGGLE_HBM" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/hbm_widget" />
@@ -126,7 +130,6 @@
         <receiver
             android:name=".tasker.RunProfileReceiver"
             android:process=":background">
-
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>
@@ -138,7 +141,6 @@
                 <action android:name="com.kerneladiutor.mod.action.ACTION_TOGGLE_STATE" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".services.HighBrightnessModeReceiver">
             <intent-filter>
                 <action android:name="com.kerneladiutor.mod.action.HBM_ON" />
@@ -149,7 +151,7 @@
         <service
             android:name=".services.PerAppMonitor"
             android:label="@string/accessibility_service_label"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
@@ -163,7 +165,7 @@
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.grarak.kerneladiutor.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
@@ -172,6 +174,12 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="61872925e4455ae058115a382c80d6c48a381d6a" />
+
+        <activity android:name=".ShortcutActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

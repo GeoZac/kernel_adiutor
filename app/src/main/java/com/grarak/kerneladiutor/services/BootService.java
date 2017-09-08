@@ -21,6 +21,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -250,7 +251,6 @@ public class BootService extends Service {
             public void onError() {
                 log("update check onSuccess");
             }
-        } , getString(R.string.APP_UPDATE_URL));
+        }, getString(R.string.APP_UPDATE_URL));
     }
-
 }

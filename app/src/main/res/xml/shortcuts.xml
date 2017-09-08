@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_flash"
+        android:shortcutId="settings"
+        android:shortcutLongLabel="@string/settings"
+        android:shortcutShortLabel="@string/settings">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.grarak.kerneladiutor.ShortcutActivity"
+            android:targetPackage="com.grarak.kerneladiutor">
+        </intent>
+    </shortcut>
+</shortcuts>

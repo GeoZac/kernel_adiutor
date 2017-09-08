@@ -18,6 +18,7 @@ package com.grarak.kerneladiutor;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -616,5 +617,4 @@ public class MainActivity extends BaseActivity implements Constants {
             }
         } , getString(R.string.APP_UPDATE_URL));
     }
-
 }
