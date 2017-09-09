@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.grarak.kerneladiutor">
+    package="com.kerneladiutor.mod">
 
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -163,7 +163,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.grarak.kerneladiutor.fileprovider"
+            android:authorities="com.kerneladiutor.mod.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

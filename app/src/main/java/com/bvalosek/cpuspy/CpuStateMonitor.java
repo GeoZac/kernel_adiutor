@@ -10,9 +10,9 @@ package com.bvalosek.cpuspy;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 
-import com.grarak.kerneladiutor.utils.Constants;
-import com.grarak.kerneladiutor.utils.Utils;
-import com.grarak.kerneladiutor.utils.kernel.CPU;
+import com.kerneladiutor.mod.utils.Constants;
+import com.kerneladiutor.mod.utils.Utils;
+import com.kerneladiutor.mod.utils.kernel.CPU;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

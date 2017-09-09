@@ -1,4 +1,4 @@
-package com.grarak.kerneladiutor;
+package com.kerneladiutor.mod;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

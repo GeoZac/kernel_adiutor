@@ -4,12 +4,12 @@
         android:enabled="true"
         android:icon="@drawable/ic_flash"
         android:shortcutId="settings"
-        android:shortcutLongLabel="@string/settings"
-        android:shortcutShortLabel="@string/settings">
+        android:shortcutLongLabel="@string/apply_settings"
+        android:shortcutShortLabel="@string/apply_settings">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.grarak.kerneladiutor.ShortcutActivity"
-            android:targetPackage="com.grarak.kerneladiutor">
+            android:targetClass="com.kerneladiutor.mod.ShortcutActivity"
+            android:targetPackage="com.kerneladiutor.mod">
         </intent>
     </shortcut>
 </shortcuts>
