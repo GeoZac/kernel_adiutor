@@ -16,18 +16,21 @@
 
 package com.kerneladiutor.mod.services;
 
+import android.annotation.TargetApi;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
+import com.kerneladiutor.library.root.RootUtils;
 import com.kerneladiutor.mod.MainActivity;
 import com.kerneladiutor.mod.R;
 import com.kerneladiutor.mod.fragments.kernel.BatteryFragment;
@@ -53,7 +56,6 @@ import com.kerneladiutor.mod.utils.kernel.CPUVoltage;
 import com.kerneladiutor.mod.utils.kernel.CoreControl;
 import com.kerneladiutor.mod.utils.kernel.Screen;
 import com.kerneladiutor.mod.utils.tools.UpdateChecker;
-import com.kerneladiutor.library.root.RootUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,8 @@ public class BootService extends Service {
     private final int id = 1;
     private NotificationManager mNotifyManager;
     private NotificationCompat.Builder mBuilder, mUpdate;
+    int mNotificationId = 1;
+    String mChannelId = "boot_service";
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -81,6 +85,7 @@ public class BootService extends Service {
         init();
     }
 
+    @TargetApi(Build.VERSION_CODES.O)
     private void init() {
         final List<String> applys = new ArrayList<>();
         final List<String> plugins = new ArrayList<>();
@@ -113,11 +118,19 @@ public class BootService extends Service {
 
         if (applys.size() > 0 || plugins.size() > 0) {
             final int delay = Utils.getInt("applyonbootdelay", 5, this);
+            CharSequence mChannelName = "Apply Settings on Boot";
+            int mNotificationImportance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(mChannelId, mChannelName, mNotificationImportance);
             mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            mBuilder = new NotificationCompat.Builder(this);
+            assert mNotifyManager != null;
+            mNotifyManager.createNotificationChannel(mChannel);
+            mBuilder = new NotificationCompat.Builder(this, mChannelId);
             mBuilder.setContentTitle(getString(R.string.apply_on_boot))
                     .setContentText(getString(R.string.apply_on_boot_time, delay))
-                    .setSmallIcon(R.drawable.ic_launcher_preview);
+                    .setSmallIcon(R.drawable.ic_launcher_preview)
+                    .setChannelId(mChannelId)
+                    .build();
+            mNotifyManager.notify(mNotificationId, mBuilder.build());
 
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
             stackBuilder.addParentStack(MainActivity.class);
@@ -232,7 +245,7 @@ public class BootService extends Service {
 
                 if (UpdateChecker.isOldVersion(appUpdateData)) {
                     mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    mUpdate = new NotificationCompat.Builder(BootService.this);
+                    mUpdate = new NotificationCompat.Builder(BootService.this, mChannelId);
                     mUpdate.setContentTitle(getString(R.string.update_available))
                             .setContentText(getString(R.string.update_available_open_app))
                             .setSmallIcon(R.drawable.ic_launcher_preview);
