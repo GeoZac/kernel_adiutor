@@ -60,14 +60,6 @@ public class AboutusFragment extends RecyclerViewFragment {
         addView(mModificationCard);
     }
 
-    private void Aboutall() {
-        CardViewItem.DCardView mAboutall = new CardViewItem.DCardView();
-        mAboutall.setTitle(getString(R.string.authors));
-        mAboutall.setDescription(getString(R.string.authors_summary));
-
-        addView(mAboutall);
-    }
-
     private void googlePlusInit() {
         CardViewItem.DCardView mGooglePlusCard = new CardViewItem.DCardView();
         mGooglePlusCard.setTitle(getString(R.string.google_plus_community));
