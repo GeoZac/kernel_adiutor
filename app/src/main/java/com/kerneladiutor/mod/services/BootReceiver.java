@@ -19,6 +19,7 @@ package com.kerneladiutor.mod.services;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 import com.kerneladiutor.mod.utils.Utils;
 import com.kerneladiutor.mod.utils.database.ProfileDB;
@@ -30,10 +31,18 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (Utils.getBoolean("emulateinit.d", false, context))
-            context.startService(new Intent(context, InitdService.class));
-        context.startService(new Intent(context, BootService.class));
-        ProfileTileReceiver.publishProfileTile(new ProfileDB(context).getAllProfiles(), context);
-    }
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (Utils.getBoolean("emulateinit.d", false, context))
+                    context.startForegroundService(new Intent(context, InitdService.class));
+                context.startForegroundService(new Intent(context, BootService.class));
+            } else {
+                if (Utils.getBoolean("emulateinit.d", false, context))
+                    context.startService(new Intent(context, InitdService.class));
+                context.startService(new Intent(context, BootService.class));
+            }
+            ProfileTileReceiver.publishProfileTile(new ProfileDB(context).getAllProfiles(), context);
+        }
 
+    }
 }
