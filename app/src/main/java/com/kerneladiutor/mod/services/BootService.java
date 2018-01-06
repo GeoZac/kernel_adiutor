@@ -117,7 +117,7 @@ public class BootService extends Service {
         }
 
         if (applys.size() > 0 || plugins.size() > 0) {
-            final int delay = Utils.getInt("applyonbootdelay", 5, this);
+            final int delay = Utils.getInt("applyonbootdelay", 0, this);
             CharSequence mChannelName = "Apply Settings on Boot";
             int mNotificationImportance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel mChannel = new NotificationChannel(mChannelId, mChannelName, mNotificationImportance);
